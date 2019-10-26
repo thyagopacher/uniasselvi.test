@@ -69,6 +69,13 @@ $produto = new Produto($conexao);
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>% Desconto</label>
+                                            <input type="text" name="PctDesconto" id="PctDesconto" class="form-control real" value="<?=$pedidop['PctDesconto']?>"/>
+                                        </div>
+                                    </div>
+                                    
                                     <div id="itensPedidos" class="col-md-12 divInputs">
                                         <?php
                                         if (isset($_GET['NumPedido']) && $_GET['NumPedido'] != NULL && $_GET['NumPedido'] != "") {

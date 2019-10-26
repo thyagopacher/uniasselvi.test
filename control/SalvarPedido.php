@@ -16,7 +16,7 @@ if(isset($pedido->NumPedido) && $pedido->NumPedido != NULL && $pedido->NumPedido
     $res = $pedido->atualizar();
 }else{
     $res = $pedido->inserir();
-    $pedido->CodPedido = mysqli_insert_id($conexao->conexao);
+    $pedido->NumPedido = mysqli_insert_id($conexao->conexao);
 }
 
 if ($res == FALSE) {
@@ -24,7 +24,8 @@ if ($res == FALSE) {
 } 
 
 foreach ($_POST['CodProduto'] as $key => $value) {
-    $jaTinha = $conexao->comandoArray("select CodItem from itempedido where CodPedido = {$pedido->NumPedido} and CodProduto = {$value}");
+    $sql = "select CodItem from itempedido where CodPedido = {$pedido->NumPedido} and CodProduto = {$value}";
+    $jaTinha = $conexao->comandoArray($sql);
     $item = new ItemPedido($conexao);
     $item->CodProduto = $value;
     $item->Quantidade = $_POST['Quantidade'][$key];

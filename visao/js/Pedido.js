@@ -163,7 +163,7 @@ $(document).ready(function () {
     $("#btProcurarPedido").click(function () {
         var buttonCommon = {
             exportOptions: {
-                columns: [0, 1, 2, 3]
+                columns: [0, 1, 2, 3, 4, 5, 6]
             }
         };
         $.ajax({

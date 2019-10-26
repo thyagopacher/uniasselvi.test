@@ -13,6 +13,7 @@ Class Pedido {
     public $CodCliente;
     public $NomeCliente;
     public $CPF;
+    public $PctDesconto;
     private $conexao;
 
     public function __construct($conn) {
@@ -69,7 +70,13 @@ Class Pedido {
             $and .= " and cliente.CPF like '%{$this->CPF}%'";
         }
         $sql = "select pedido.NumPedido, pedido.DtPedido, pedido.CodCliente, cliente.NomeCliente,
-            (select count(1) from itempedido where itempedido.CodPedido = pedido.NumPedido) as TotalItens 
+            (select count(1) from itempedido where itempedido.CodPedido = pedido.NumPedido) as TotalItens,
+            (
+                select sum(produto.ValorUnitario * item.Quantidade) 
+                from itempedido as item
+                inner join produto on produto.CodProduto = item.CodProduto
+                where item.CodPedido = pedido.NumPedido
+            ) as ValorTotal, pedido.PctDesconto
         from pedido 
         inner join cliente on cliente.CodCliente = pedido.CodCliente
         where 1 = 1 ${and} order by pedido.NumPedido";

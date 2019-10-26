@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26-Out-2019 às 18:03
+-- Tempo de geração: 26-Out-2019 às 20:25
 -- Versão do servidor: 10.4.8-MariaDB
 -- versão do PHP: 7.1.32
 
@@ -61,7 +61,9 @@ CREATE TABLE `itempedido` (
 --
 
 INSERT INTO `itempedido` (`CodItem`, `CodProduto`, `CodPedido`, `Quantidade`) VALUES
-(12, 21, 2, 2);
+(12, 21, 2, 2),
+(17, 1, 10, 3),
+(18, 15, 10, 2);
 
 -- --------------------------------------------------------
 
@@ -72,15 +74,21 @@ INSERT INTO `itempedido` (`CodItem`, `CodProduto`, `CodPedido`, `Quantidade`) VA
 CREATE TABLE `pedido` (
   `NumPedido` int(11) NOT NULL,
   `DtPedido` timestamp NOT NULL DEFAULT current_timestamp(),
-  `CodCliente` int(11) NOT NULL
+  `CodCliente` int(11) NOT NULL,
+  `PctDesconto` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `pedido`
 --
 
-INSERT INTO `pedido` (`NumPedido`, `DtPedido`, `CodCliente`) VALUES
-(2, '2019-10-26 14:46:53', 1);
+INSERT INTO `pedido` (`NumPedido`, `DtPedido`, `CodCliente`, `PctDesconto`) VALUES
+(2, '2019-10-26 14:46:53', 1, 5.53),
+(6, '2019-10-26 18:22:37', 1, 0),
+(7, '2019-10-26 18:22:43', 1, 0),
+(8, '2019-10-26 18:23:08', 1, 0),
+(9, '2019-10-26 18:24:13', 1, 0),
+(10, '2019-10-26 18:24:25', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -168,13 +176,13 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de tabela `itempedido`
 --
 ALTER TABLE `itempedido`
-  MODIFY `CodItem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `CodItem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `NumPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `NumPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `produto`

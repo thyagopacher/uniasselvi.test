@@ -18,6 +18,9 @@ if ($qtd > 0) {
     echo '<th>Num. Pedido</th>';
     echo '<th>Cliente</th>';
     echo '<th>Qtd. Itens</th>';
+    echo '<th><i class="fas fa-money-bill-alt"></i> Total Geral</th>';
+    echo '<th> Desconto</th>';
+    echo '<th><i class="fas fa-money-bill-alt"></i> Total C/ Desconto</th>';
     echo '<th>Opções</th>';
     echo '</tr>';
     echo '</thead>';
@@ -28,6 +31,10 @@ if ($qtd > 0) {
         echo '<td>', $pedidop['NumPedido'], '</td>';
         echo '<td><a target="_blank" title="Clique para visualizar detalhes do cliente" href="/cliente?CodCliente=', $pedidop['CodCliente'], '">', $pedidop['NomeCliente'], '</a></td>';
         echo '<td>', $pedidop['TotalItens'], '</td>';
+        echo '<td>', number_format($pedidop['ValorTotal'], 2, ',', ''), '</td>';
+        echo '<td>', number_format($pedidop['PctDesconto'], 2, ',', ''), '</td>';
+        $vlFinal = $pedidop['ValorTotal'] - ($pedidop['ValorTotal'] * $pedidop['PctDesconto'] / 100);
+        echo '<td>', number_format($vlFinal, 2, ',', ''), '</td>';
         echo '<td>';
         echo '<a href="?NumPedido=', $pedidop['NumPedido'], '"><i class="fas fa-pencil-alt"></i></a> ';
         echo '<a href="javascript: excluirPedido(', $pedidop['NumPedido'], ')"><i class="fas fa-times"></i></a> ';
