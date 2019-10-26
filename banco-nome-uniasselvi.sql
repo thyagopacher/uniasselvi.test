@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26-Out-2019 às 20:25
+-- Tempo de geração: 26-Out-2019 às 21:18
 -- Versão do servidor: 10.4.8-MariaDB
 -- versão do PHP: 7.1.32
 
@@ -41,7 +41,8 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`CodCliente`, `NomeCliente`, `CPF`, `Email`, `Senha`) VALUES
-(1, 'thyago henrique pacher', '05820810929', 'thyago.pacher@gmail.com', '6a4120be23c814f80233ecbb34e71adc');
+(1, 'thyago henrique pacher', '05820810929', 'thyago.pacher@gmail.com', '6a4120be23c814f80233ecbb34e71adc'),
+(17, 'sssssssss', '353534', 'eeee@ssss', 'fdea1593ad940821012f52fc0d5282f8');
 
 -- --------------------------------------------------------
 
@@ -63,7 +64,9 @@ CREATE TABLE `itempedido` (
 INSERT INTO `itempedido` (`CodItem`, `CodProduto`, `CodPedido`, `Quantidade`) VALUES
 (12, 21, 2, 2),
 (17, 1, 10, 3),
-(18, 15, 10, 2);
+(18, 15, 10, 2),
+(21, 1, 12, 4),
+(22, 13, 12, 2);
 
 -- --------------------------------------------------------
 
@@ -84,11 +87,8 @@ CREATE TABLE `pedido` (
 
 INSERT INTO `pedido` (`NumPedido`, `DtPedido`, `CodCliente`, `PctDesconto`) VALUES
 (2, '2019-10-26 14:46:53', 1, 5.53),
-(6, '2019-10-26 18:22:37', 1, 0),
-(7, '2019-10-26 18:22:43', 1, 0),
-(8, '2019-10-26 18:23:08', 1, 0),
-(9, '2019-10-26 18:24:13', 1, 0),
-(10, '2019-10-26 18:24:25', 1, 0);
+(10, '2019-10-26 18:24:25', 1, 0),
+(12, '2019-10-26 19:18:02', 17, 0);
 
 -- --------------------------------------------------------
 
@@ -114,10 +114,6 @@ INSERT INTO `produto` (`CodProduto`, `NomeProduto`, `ValorUnitario`, `CodBarras`
 (5, 'produto 4', 44444.44, '44444444444'),
 (6, 'produto 5', 555555.55, '555555555555'),
 (7, 'produto 6', 666666.66, '666666666'),
-(8, 'produto 7', 77.77, '7777777'),
-(9, 'produto 8', 8888, '888'),
-(10, 'produto 9', 8888, '888'),
-(11, 'produto 10', 8888, '888'),
 (12, 'produto 11', 8888, '888'),
 (13, 'produto 12', 8888, '888'),
 (14, 'produto 13', 8888, '888'),
@@ -128,7 +124,7 @@ INSERT INTO `produto` (`CodProduto`, `NomeProduto`, `ValorUnitario`, `CodBarras`
 (19, 'produto 18', 8888, '888'),
 (20, 'produto 19', 8888, '888'),
 (21, 'produto 20', 8888, '888'),
-(22, 'ddddddddddd', 44454.54, 'eeee');
+(22, 'fsafafasfa', 44454.54, 'eeee');
 
 --
 -- Índices para tabelas despejadas
@@ -170,25 +166,25 @@ ALTER TABLE `produto`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `CodCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `CodCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `itempedido`
 --
 ALTER TABLE `itempedido`
-  MODIFY `CodItem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `CodItem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `NumPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `NumPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `CodProduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `CodProduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Restrições para despejos de tabelas

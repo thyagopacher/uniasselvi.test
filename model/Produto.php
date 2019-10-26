@@ -31,6 +31,10 @@ Class Produto {
     }
 
     public function excluir() {
+        $usadoEmItem = $this->conexao->comandoArray('select count(1) as qtd from itempedido where CodProduto = '. $this->CodProduto);
+        if(isset($usadoEmItem['qtd']) && $usadoEmItem['qtd'] != NULL && $usadoEmItem['qtd'] > 0){
+            die(json_encode(array('mensagem' => "Por favor rever pois este produto esta sendo usado em {$usadoEmItem['qtd']} itens pedidos !!!", 'situacao' => false)));
+        }
         return $this->conexao->excluir("produto", $this);
     }
 

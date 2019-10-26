@@ -154,6 +154,7 @@ $produto = new Produto($conexao);
                                     </div>
                                     <div class="col-md-12">
                                         <button type="button" id="btProcurarPedido" class="btn btn-primary">Procurar</button>
+                                        <button type="button" id="btExcluirTudo" class="btn btn-danger" style="display: none">Excluir Selecionados</button>
                                     </div>
                                 </form>
                                 <br>

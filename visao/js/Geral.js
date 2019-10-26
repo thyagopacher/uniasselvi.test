@@ -11,7 +11,9 @@ var lngPt = {
     }
 };
 
-
+function verificaTelaPressionada(Event) {
+    return (Event.keyCode) ? (Event.keyCode) : Event.which;
+}
 
 function optionClientes() {
     $.ajax({
@@ -44,7 +46,32 @@ function optionProdutos() {
     });
 }
 
+function marcarGeral(){
+    if($("#checkGeral").is(":checked")){
+        $(".checkInput").prop('checked', true);
+        $("#btExcluirTudo").show();
+    }else{
+        $(".checkInput").prop('checked', false);
+        $("#btExcluirTudo").hide();
+    }    
+}
+
+function verificaMarcado(componente){
+    if(componente.is(':checked')){
+        $("#btExcluirTudo").show();
+    }else{
+        if(!$(".checkInput").is(":checked")){
+            $("#btExcluirTudo").hide();
+        }
+    }    
+}
+
 $(function() {
+    
+    $("#btExcluirTudo").click(function(){
+        excluirTudo();
+    });
+    
     if ($(".inteiro").length) {
         $('.inteiro').keypress((event) => {
             var tecla = verificaTelaPressionada(event);

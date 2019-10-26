@@ -1,3 +1,32 @@
+function excluirTudo() {
+    swal({
+        title: "Deseja excluir produtos selecionados?",
+        text: "Uma vez apagado, você não poderá mais recuperar estas informações!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                url: "/control/ExcluirProdutosSelecionados.php",
+                type: "POST",
+                data: $("#fExcluirProduto").serialize(),
+                dataType: 'json',
+                success: function (data, textStatus, jqXHR) {
+                    if (data.situacao) {
+                        swal("Produto", data.mensagem, "success");
+                        $("#btProcurarProduto").click();
+                    } else {
+                        swal("Atenção", data.mensagem, "error");
+                    }
+                }, error: function (errorThrown) {
+                    swal("Erro", "Erro causado por:" + errorThrown, "error");
+                }
+            });
+        }
+    });
+}
+
 function excluirProduto(codigo) {
     if (codigo > 0) {
         swal({
@@ -79,6 +108,7 @@ $("#btProcurarProduto").click(function () {
                     })
                 ]
             });
+            $("#btExcluirTudo").hide();
         }, error: function (errorThrown) {
             swal("Erro", "Erro causado por:" + errorThrown, "error");
         }

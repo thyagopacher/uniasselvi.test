@@ -88,6 +88,7 @@ if(isset($_GET['CodProduto']) && $_GET['CodProduto'] != NULL && $_GET['CodProdut
                                     
                                     <div class="col-md-12">
                                         <button type="button" id="btProcurarProduto" class="btn btn-primary">Procurar</button>
+                                        <button type="button" id="btExcluirTudo" class="btn btn-danger" style="display: none">Excluir Selecionados</button>
                                     </div>
                                 </form>
                                 <br>

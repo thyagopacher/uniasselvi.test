@@ -11,9 +11,11 @@ foreach ($variables as $key => $value) {
 $res = $pedido->procurar();
 $qtd = $conexao->qtdResultado($res);
 if ($qtd > 0) {
+    echo '<form method="post" id="fExcluirPedido">';
     echo '<table id="tPedido" width="100%" class="table table-bordered">';
     echo '<thead>';
     echo '<tr>';
+    echo '<th class="text-center"><input type="checkbox" id="checkGeral" onclick="marcarGeral()" class="form-control"/></th>';
     echo '<th><i class="far fa-calendar-alt"></i> Dt. Pedido</th>';
     echo '<th>Num. Pedido</th>';
     echo '<th>Cliente</th>';
@@ -27,6 +29,7 @@ if ($qtd > 0) {
     echo '<tbody>';
     while ($pedidop = $conexao->resultadoArray($res)) {
         echo '<tr>';
+        echo '<td class="text-center"><input type="checkbox" name="NumPedido[]" class="checkInput form-control" onclick="verificaMarcado($(this));" value="', $pedidop['NumPedido'], '"/></td>';
         echo '<td data-order="', $pedidop['DtPedido'], '">', date("d/m/Y H:i", strtotime($pedidop['DtPedido'])), '</td>';
         echo '<td>', $pedidop['NumPedido'], '</td>';
         echo '<td><a target="_blank" title="Clique para visualizar detalhes do cliente" href="/cliente?CodCliente=', $pedidop['CodCliente'], '">', $pedidop['NomeCliente'], '</a></td>';
@@ -44,6 +47,7 @@ if ($qtd > 0) {
     }
     echo '</tbody>';
     echo '</table>';
+    echo '</form>';
 } else {
     echo '<div class="alert alert-info">
     <strong>Atenção!</strong> Nada foi encontrado com esta pesquisa, tente alterar os filtros

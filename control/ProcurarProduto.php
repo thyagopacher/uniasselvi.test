@@ -11,9 +11,11 @@ foreach ($variables as $key => $value) {
 $res = $produto->procurar();
 $qtd = $conexao->qtdResultado($res);
 if($qtd > 0){
+    echo '<form method="post" id="fExcluirProduto">';
     echo '<table id="tProduto" width="100%" class="table table-bordered">';
     echo '<thead>';
     echo '<tr>';
+    echo '<th class="text-center"><input type="checkbox" id="checkGeral" onclick="marcarGeral()" class="form-control"/></th>';
     echo '<th>Nome</th>';
     echo '<th><i class="far fa-money-bill-alt"></i> Valor Unit.</th>';
     echo '<th>Cod. Barras</th>';
@@ -23,6 +25,7 @@ if($qtd > 0){
     echo '<tbody>';
     while($produtop = $conexao->resultadoArray($res)){
         echo '<tr>';
+        echo '<td class="text-center"><input type="checkbox" name="CodProduto[]" class="checkInput form-control" onclick="verificaMarcado($(this));" value="', $produtop['CodProduto'], '"/></td>';
         echo '<td>',$produtop['NomeProduto'],'</td>';
         echo '<td>',number_format($produtop['ValorUnitario'], 2, ',', '.'),'</td>';
         echo '<td>',$produtop['CodBarras'],'</td>';
@@ -34,6 +37,7 @@ if($qtd > 0){
     }
     echo '</tbody>';
     echo '</table>';
+    echo '</form>';
 } else {
     echo '<div class="alert alert-info">
     <strong>Atenção!</strong> Nada foi encontrado com esta pesquisa, tente alterar os filtros

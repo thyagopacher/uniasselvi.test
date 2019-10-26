@@ -30,6 +30,35 @@ function excluirItemPedido(CodItem, NumPedido) {
     }
 }
 
+function excluirTudo() {
+    swal({
+        title: "Deseja excluir pedidos selecionados?",
+        text: "Uma vez apagado, você não poderá mais recuperar estas informações!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                url: "/control/ExcluirPedidosSelecionados.php",
+                type: "POST",
+                data: $("#fExcluirPedido").serialize(),
+                dataType: 'json',
+                success: function (data, textStatus, jqXHR) {
+                    if (data.situacao) {
+                        swal("Pedido", data.mensagem, "success");
+                        $("#btProcurarPedido").click();
+                    } else {
+                        swal("Atenção", data.mensagem, "error");
+                    }
+                }, error: function (errorThrown) {
+                    swal("Erro", "Erro causado por:" + errorThrown, "error");
+                }
+            });
+        }
+    });
+}
+
 function excluirPedido(codigo) {
     if (codigo > 0) {
         swal({
@@ -190,6 +219,7 @@ $(document).ready(function () {
                         })
                     ]
                 });
+                $("#btExcluirTudo").hide();
             }, error: function (errorThrown) {
                 swal("Erro", "Erro causado por:" + errorThrown, "error");
             }

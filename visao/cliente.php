@@ -55,7 +55,7 @@ if(isset($_GET['CodCliente']) && $_GET['CodCliente'] != NULL && $_GET['CodClient
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>CPF</label>
-                                            <input type="email" class="form-control" id="CPF" maxlength="11" minlength="11" placeholder="Digite CPF" name="CPF" required value="<?=$clientep['CPF']?>">
+                                            <input type="email" class="form-control inteiro" id="CPF" maxlength="11" minlength="11" placeholder="Digite CPF" name="CPF" required value="<?=$clientep['CPF']?>">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -92,6 +92,7 @@ if(isset($_GET['CodCliente']) && $_GET['CodCliente'] != NULL && $_GET['CodClient
                                     </div>
                                     <div class="col-md-12">
                                         <button type="button" id="btProcurarCliente" class="btn btn-primary">Procurar</button>
+                                        <button type="button" id="btExcluirTudo" class="btn btn-danger" style="display: none">Excluir Selecionados</button>
                                     </div>
                                 </form>
                                 <br>

@@ -1,3 +1,32 @@
+function excluirTudo() {
+    swal({
+        title: "Deseja excluir clientes selecionados?",
+        text: "Uma vez apagado, você não poderá mais recuperar estas informações!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                url: "/control/ExcluirClientesSelecionados.php",
+                type: "POST",
+                data: $("#fExcluirCliente").serialize(),
+                dataType: 'json',
+                success: function (data, textStatus, jqXHR) {
+                    if (data.situacao) {
+                        swal("Cliente", data.mensagem, "success");
+                        $("#btProcurarCliente").click();
+                    } else {
+                        swal("Atenção", data.mensagem, "error");
+                    }
+                }, error: function (errorThrown) {
+                    swal("Erro", "Erro causado por:" + errorThrown, "error");
+                }
+            });
+        }
+    });
+}
+
 function excluirCliente(codigo) {
     if (codigo > 0) {
         swal({
@@ -63,7 +92,7 @@ $("#btProcurarCliente").click(function () {
         success: function (data, textStatus, jqXHR) {
             $("#listagemCliente").html(data);
             $('#tCliente').DataTable({
-                "lengthMenu": [[5,10, 20, 40, -1], [5,10, 20, 40, "All"]],
+                "lengthMenu": [[5, 10, 20, 40, -1], [5, 10, 20, 40, "All"]],
                 "pageLength": 20,
                 "searching": false,
                 dom: 'Blfrtip',
@@ -79,6 +108,7 @@ $("#btProcurarCliente").click(function () {
                     })
                 ]
             });
+            $("#btExcluirTudo").hide();
         }, error: function (errorThrown) {
             swal("Erro", "Erro causado por:" + errorThrown, "error");
         }
